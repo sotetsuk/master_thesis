@@ -139,7 +139,7 @@ pair of classes:
 %
 \begin{align}
 \begin{split}
-s_{c,c'}(\bvec{v})  = E_{q_{c, c'}} \left[  \left\| \nabla_{\bvec{v}} f_c (\bvec{x}) \right\|_2^2 \right],
+s_{c,c'}(\bvec{v})  = E_{q_{c, c'}} \left[ \left( \frac{\partial f_c (\bvec{x})}{\partial {\bvec{v}}} \right)^2 \right],
 \end{split}  \label{def:l_psm}
 \end{align}
 %
@@ -152,14 +152,14 @@ To get the intuition about this value, note that the value for $(c, c') =
 \begin{flalign}
   \lim_{\varepsilon \rightarrow 0}
  E_{\{9, 4\}} \left[
- \left\|
+ \left(
   \frac
   {\log P \left(Y = \parbox{\bwcnine}{\usebox{\cnine}} |
   \parbox{\bwcnine}{\usebox{\sfour}} + \varepsilon \bvec{v} \right)
   - \log P \left(Y = \parbox{\bwcnine}{\usebox{\cnine}} |
   \parbox{\bwcnine}{\usebox{\sfour}} \right)}
   {\varepsilon}
-  \right\|_2^2
+  \right)^2
   \right],
 \end{flalign}
 %

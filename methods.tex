@@ -50,16 +50,14 @@ We define $s(\bvec{v})$ as the sensitivity of $f$ in arbitrary direction $\bvec{
 %
 \begin{align}
 \begin{split}
- s(\bvec{v}) := E_q\left[ \left\| \nabla_{\bvec{v}} f(\bvec{x}) \right\|_2^2 \right],
+ s(\bvec{v}) := E_q\left[ \left( \frac{\partial f(\bvec{x})}{\partial \bvec{v}} \right)^2 \right].
 \end{split} \label{eq:koyamada_sensitivity}
 \end{align}
-%
-where $\|\cdot\|_2$ defines the L2 norm.
 %
 Recall that the directional derivative is defined by
 \begin{align}
 \begin{split}
-\nabla_{\bvec{v}} f(\bvec{x}) = \nabla f(\bvec{x})^{\mathrm{T}} \bvec{v}.
+\frac{\partial f(\bvec{x})}{\partial \bvec{v}} := \nabla f(\bvec{x})^{\mathrm{T}} \bvec{v}.
 \end{split}
 \end{align}
 %
