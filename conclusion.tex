@@ -1,0 +1,74 @@
+\section{Conclusion}
+\label{sec:discussion}
+%%% INTRO OF DISCUSSION %%%
+We proposed a method to decompose the input space based
+on the sensitivity of classifiers.
+%
+We assessed its performance on the classifiers trained for
+digit classification (Section\,\ref{sec:results}) and for brain
+decoding as a practical application (Section\,\ref{sec:application}).
+% END OF PARAGRAPH
+
+
+%%% Application to digit recognition %%%
+In the application to digit classification,
+we demonstrated the PSA's three aspects of superiority to the standard sensitivity
+analysis \cite{Zurada1994,Zurada1997,Kjems2002}; (1) polarity of signs in a map, (2)
+sub-principal information, and (3) capability of sparse visualization.
+Furthermore, the visualization achieved with our PSA reveals
+at least two general aspects of the classifiers trained in the experiment.
+%
+First, note in Fig.\,3(b) and Fig.\,\ref{fig:local_s_mnist} that the first few
+($\sim 10$ out of $28 \times 28 = 784$)
+PSMs of the trained classifier dominate the sensitivity
+for the binary classification problem.
+%
+Second, we see that the classifiers use these few PSMs out of $784$
+dimensions to solve different binary classification problems.
+%
+We are thus able to see that the nonlinear classifiers in the form of
+neural networks solve vast number of specific classification problems
+(such as binary classification problems) \textit{simultaneously and efficiently}
+by tuning its sensitivity to the input in a data-driven manner.
+%
+One cannot attain this information with the sensitivity analysis alone.
+% END OF PARAGRAPH
+
+
+%%% Application to functional neuroimaging %%%
+In Section\,\ref{sec:application}, we applied deep learning to a large
+fMRI database to classify brain activities into seven categories of
+human tasks.
+%
+In particular, we constructed a DNN-based brain decoder aimed at
+classifying the brain activities from the features common to all subjects.
+%
+The strength of DNN is its high ability to capture nonlinear, high
+dimensional features from big data.
+%
+In fact, the subject-transfer decoding accuracy of our DNN was superior to those of other baseline methods, including SVMs
+and logistic regressions.
+%
+The high performance of our DNN over the dataset acquired from a large population is indicative of the ability of
+our decoder to capture nonlinear discriminative features that are common to all subjects.
+%
+Interestingly, when we visualized these universal discriminative
+features in the form of PSMs, we were able to find non-trivial
+associations between the features and functionally connected networks
+recognized in neuroscience.
+%
+This observation suggests that the functional connectivity common to all
+subjects are playing important roles in characterizing task-specific
+brain activities.
+% END OF PARAGRAPH
+
+%%% Conclusion %%%
+With PSA, one can visualize the decomposition of the
+knowledge about the input space learnt by supervised classifiers.
+%
+From the PSA of efficient classifiers, one might obtain a meaningful decomposition of the input
+space that can possibly aid us to acquire the scientific knowledge in the data
+which is otherwise difficult to obtain.
+%
+PSA might also prove beneficial in other sciences, such as geology, atmospheric science and oceanography.
+% END OF PARAGRAPH

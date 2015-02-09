@@ -1,0 +1,190 @@
+\section{Introduction}
+%%% Machine learning %%%
+%
+Machine learning is a powerful methodology to construct efficient and robust
+predictors and classifiers.
+%
+In particular, deep learning, a technology to train complicated neural
+networks with multiple hidden layers, i.e., deep neural networks (DNNs),
+has been attracted much attention because of its outstanding performance in
+several artificial intelligence tasks \cite{krizhevsky2012imagenet,seide2011conversational,DeepFace}.
+%
+Now, literature suggests the ability of supervised learning not only to reproduce
+``intuition and experience'' based on human supervision \cite{DeepFace},
+but also to successfully classify the objects that humans cannot
+sufficiently classify with inspection alone \cite{Horikawa2013,Mural1991}.
+%
+This work is motivated by the cases in which the supervised
+classifier eclipses the human decisions.
+% END OF PARAGRAPH
+
+%%% Superiority of machines %%%
+%
+In such cases, one might be able to learn the knowledge of the data from
+the trained classifiers.
+%
+We may say that the case that the classifiers defeat the human
+occurs when the classifier holds more knowledge about the
+data and the subject classes than us, because our incompetence in the classification problems
+can be attributed solely to our lack of understanding about the class
+properties and/or the similarity metrics.
+%
+For example, Miyawaki et al.\ \cite{miyawaki2008visual} used
+logistic regression for this purpose in neuroimaging.
+%
+Let us consider the classifier $f:\RR^{d} \rightarrow [0, 1]$ with the
+$d$-dimensional input $\bvec{x}$.
+Logistic regression is a linear model
+\begin{equation}
+ f(\bvec{x}) = \sigma \left(\sum_{i}^{d} w_i x_i + b\right),
+\end{equation}
+where $w_i$ and $b$ denote a
+weight parameter and a bias parameter, respectively, and $\sigma$ is a sigmoid function.
+%
+Miyawaki et al.\ assigned each small three-dimensional brain unit
+(voxel) to a input dimension,
+and visualized the determined weights, $(w_1, \dots, w_d)$
+as brain map in order to extract the knowledge captured by the trained classifier.
+%
+One can understand that if the absolute value of weight $|w_i|$ is large enough, then the
+corresponding $i$-th input dimension (voxel) is important for characterizing the
+subject class.
+%
+Other neuroimaging studies \cite{LaConte2005,yamashita2008sparse,abraham2014machine} also
+provided such visualization of linear models.
+% END OF PARAGRAPH
+
+%%% Machines are complicated %%%
+%
+Unfortunately, however, trained classifiers are often so complex that
+they defy the human interpretation.
+%
+If one add a hidden layer to the logistic regression:
+\begin{equation}
+ \label{eq:simple_nn}
+f(\bvec{x}) = \sigma \left(\sum_{i}^{l} w_{i}^{(2)} h
+\left(\sum_{j}^{d} w_{ij}^{(1)} x_{j} + b_{i}^{(1)}\right) +
+b^{(2)}\right),
+\end{equation}
+where $h$ is a nonlinear activation function,
+then the nonlinear classifier $f$ becomes too complex for the human to
+directly analyze the relationship between the input data and the classes,
+because the hierarchical architecture of the classifier $f$ masks the
+direct connection between the input and output.
+%
+The equation \eqref{eq:simple_nn} is the simplest version of
+feed-forward neural networks, and thus DNNs with more hidden layers are
+too complicated for the human to interpret their decision.
+%
+However, the superiority of nonlinear machine learning techniques like deep
+learning \cite{krizhevsky2012imagenet,seide2011conversational,DeepFace} strongly suggests that the trained classifiers
+capture the ``invisible'' properties of the subject classes.
+%
+Geoff Hinton solidified this into the philosophy of
+``dark knowledge'' captured within the trained neural networks \cite{DarkKnowledge}.
+%
+Thus, our objective is to visualize the decision of such nonlinear and hierarchical machines like DNN
+in the interpretable form.
+% END OF PARAGRAPH
+
+%%% Previous work %%%
+For the visualization of high-dimensional feature space of nonlinear machines,
+Zurada et al.\ \cite{Zurada1994,Zurada1997},  and Kjems et al.\ \cite{Kjems2002}
+presented seminal works.
+%
+Zurada et al.\ defined \textit{sensitivity} by
+\begin{equation}
+ \label{eq:sensitivity_intro}
+ s_i := E_q \left[ \left(\frac{\partial f(\bvec{x})}{\partial x_i} \right)^2 \right],
+\end{equation}
+where $q$ is the true distribution of $\bvec{x}$,
+in order to ``delete unimportant data components for feed-forward neural networks.''
+Kjems et al.\ visualized Zurada's idea as \textit{sensitivity map}, $\left(s_1, \dots, s_d\right)$
+in the context of neuroimaging.
+%
+Note that when the classifier $f$ is a linear model like logistic
+regression, the sensitivity satisfies $s_i \propto w_i^2$.
+%
+Rasmussen et al.\ \cite{Rasmussen2011} applied this \textit{sensitivity analysis}
+to a nonlinear kernel method in functional neuroimaging.
+%
+Because the sensitivity analysis provides a single map by the
+integration \eqref{eq:sensitivity_intro} over the
+whole input space $\RR^{d}$, we can regard the sensitivity map as a
+``global'' visualization of the classifier $f$.
+%
+Baehrens et al.\ \cite{Baehrens2010} took another approach.
+%
+Baehrens et al.\ defined \textit{local explanation vector} by the
+gradient $\nabla f (\bvec{x})$ and used it for
+analyzing the importance of features at each ``localized'' point in the
+input space.
+%
+Although these efforts have been made to visualize the
+classifiers,
+there is still much room left for improvement.
+%
+Machine learning techniques in neuroimaging, for example,
+prefer linear kernels to nonlinear kernels because of the lack of
+visualization techniques \cite{LaConte2005}.
+% END OF PARAGRAPH
+
+%%% Methods %%%
+In this study, we attempt to  generalize the idea of sensitivity
+analysis, and develop a new framework that aids us in extracting the
+knowledge from classifiers that are trained in a supervised manner.
+%
+Our framework is superior to the predecessors in that it can:
+\begin{enumerate}
+ \item be used to identify a pair of discriminative input
+       features that act oppositely in characterizing a class,
+ \item identify \textit{combinations} of discriminative features that strongly
+       characterize the subject classes,
+ \item provide platform for developing sparse, visually intuitive
+       sensitivity maps.
+\end{enumerate}
+%
+The new framework gives rise to the algorithm that we refer
+to as ``Principal Sensitivity Analysis (PSA),'' which is analogous to
+the well-established ``Principal Component Analysis (PCA).''
+%
+To demonstrate the PSA's ability to extract the knowledge captured by
+the trained classifiers, we applied the PSA to the classifier trained
+for digit classification.
+% END OF PARAGRAPH
+
+%%% Application to fMRI %%%
+As a practical application of PSA, we next used the PSA for functional neuroimaging.
+%
+In order to capture the discriminative features of brain activities
+common to all human subjects,
+we trained a DNN with a large-scale neuroimaging database and confirmed
+that, in comparison to other baseline methods, the DNN captured more discriminative features.
+%
+We then applied the PSA to the DNN-based decoder to highlight the subject-independent
+features used by the decoders for classifying brain activities.
+%
+By illustrating these features as brain maps, we found the association between
+the features and functional connectivity established in human fMRI studies \cite{raichle2001default,raichle2007default,taylor2009two,cole2013multi}.
+% END OF PARAGRAPH
+
+%%% OUTLINE %%%
+This thesis is structured as follows.
+%
+In Section\,\ref{sec:methods}, we will provide the PSA's algorithm along with
+the explanation of the conventional sensitivity analysis.
+%
+In Section\,\ref{sec:NN}, we will explain the architecture of
+ feed-forward neural networks, to which we apply the PSA, and
+ also explain its training.
+%
+In Section\,\ref{sec:results}, we will show a primitive application of
+the PSA to the classifier trained for digit classification,
+and demonstrate its advantages in comparison to the conventional sensitivity analysis.
+%
+In Section\,\ref{sec:application}, we will also provide an practical
+application of the PSA to functional neuroimaging.
+%
+Finally, in Section\,\ref{sec:discussion}, we will summarize the results
+and make conclusive remarks.
+% END OF PARAGRAPH

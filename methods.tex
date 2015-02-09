@@ -1,0 +1,301 @@
+\section{Principal Sensitivity Analysis (PSA)}
+\label{sec:methods}
+%
+\subsection{Conventional sensitivity analysis}
+%
+Before introducing the PSA, we describe the original sensitivity map
+introduced in \cite{Kjems2002}.
+%
+Let $d$ be the dimension of the input space, and let
+$f: \RR^d \to \RR$ be the classifier function obtained from supervised training.
+%
+In the case of SVM, $f$ may be the discriminant function.
+%
+In the case of nonlinear neural networks, $f$ may represent the function (or log of
+the function) that maps the input to the output of a unit in the final layer.
+%
+We are interested in the expected sensitivity of $f$
+with respect to the $i$-th input feature.
+%
+This can be written as
+\begin{align}
+\begin{split}
+ \label{eq:original_sensitivity}
+ s_i := E_q \left[ \left(\frac{\partial f(\bvec{x})}{\partial x_i} \right)^2 \right],
+\end{split}
+\end{align}
+%
+where $q$ is the distribution over the input space.
+%
+In actual implementation, the integral \eqref{eq:original_sensitivity} is
+computed with the empirical distribution $q$ of the test dataset.
+%
+Now, the vector
+\begin{align}
+\begin{split}
+\bvec{s} := \left(s_1, \dots, s_d \right)
+\end{split} \label{eq:classical_def}
+\end{align}
+of these values will give us an intuitive measure for the degree
+of importance that the classifier attaches to each input feature.
+Kjems et al.\ \cite{Kjems2002} defined $\bvec{s}$ as \textbf{sensitivity map} over the set
+of input features.
+% END OF SUBSECTION
+
+\subsection{Sensitivity in arbitrary direction}
+%
+Here, we generalize the definition \eqref{eq:original_sensitivity}.
+We define $s(\bvec{v})$ as the sensitivity of $f$ in arbitrary direction $\bvec{v} := \sum_{i}^{d} v_i
+\bvec{e}_i$, where $\bvec{e}_i$ denotes the $i$-th standard basis in $\RR^d$:
+%
+\begin{align}
+\begin{split}
+ s(\bvec{v}) := E_q\left[ \left\| \nabla_{\bvec{v}} f(\bvec{x}) \right\|_2^2 \right],
+\end{split} \label{eq:koyamada_sensitivity}
+\end{align}
+%
+where $\|\cdot\|_2$ defines the L2 norm.
+%
+Recall that the directional derivative is defined by
+\begin{align}
+\begin{split}
+\nabla_{\bvec{v}} f(\bvec{x}) = \nabla f(\bvec{x})^{\mathrm{T}} \bvec{v}.
+\end{split}
+\end{align}
+%
+Note that when we define the \textit{sensitivity kernel metric}
+%
+\begin{align}
+\begin{split}
+ \bvec{K}:= E_q \left[
+ \nabla f(\bvec{x}) \nabla f(\bvec{x})^{\mathrm{T}}
+ \right],
+\end{split}  \label{eq:koyamada_inner_p}
+\end{align}
+%
+we can rewrite $s(\bvec{v})$ by
+%
+\begin{align}
+\begin{split}
+ s(\bvec{v}) = \bvec{v}^{\mathrm{T}} \bvec{K} \bvec{v}.
+\end{split} \label{eq:koyamada_metric}
+\end{align}
+% END OF SUBSUBSECTION
+
+\subsection{Formulation of PSA}
+%
+The classical setting \eqref{eq:original_sensitivity} was developed
+in order to quantify the sensitivity of $f$ with respect
+to each individual input feature independently.
+%
+We attempt to generalize this idea and seek the \textit{combination
+of the input features} for which $f$ is most sensitive, or the combination of the input features that is
+\textit{``principal''} in the evaluation of the sensitivity of $f$.
+%
+We can quantify such combination by the vector $\bvec{v}$, solving the following
+optimization problem about $\bvec{v}$:
+%
+\begin{align}
+  \begin{split}
+\begin{aligned}
+& \text{maximize}
+& & \bvec{v}^{\mathrm{T}} \bvec{K} \bvec{v} \\
+& \text{subject to}
+& & \bvec{v}^{\mathrm{T}}\bvec{v} = 1.
+\end{aligned}
+ \end{split} \label{def:psm}
+\end{align}
+%
+The solution to this problem is simply the maximal eigenvector
+$\pm\bvec{v}^{*}$ of $\bvec{K}$.
+%
+Note that $v_i$ represents the contribution of the $i$-th input feature to this principal
+combination, and this gives rise to the map over the set of all input features.
+As such, we can say that $\bvec{v}$ is the \textbf{principal sensitivity map
+(PSM)} over the set of input features.
+%
+From now on, we call $\bvec{s}$ in the classical definition
+\eqref{eq:classical_def} as the \textbf{standard sensitivity map} and
+make the distinction.
+%
+The magnitude of $v_i$ represents the extent
+to which $f$ is sensitive to the $i$-th input feature,
+and the sign of $v_i$ will tell us the relative direction
+to which the input feature influences $f$.
+%
+The new map is thus richer in information than the standard
+sensitivity map.
+%
+In Section 3.1 we will demonstrate the benefit of this extra
+information.
+% END OF SUBSECTION
+
+\subsubsection{PSA}
+%
+We can naturally extend our construction above and also consider other
+eigenvectors of $\bvec{K}$.
+%
+We can find these vectors by solving the following optimization
+problem about $\bvec{V}$:
+% Formarization of PSMA
+\begin{align}
+\begin{split}
+\begin{aligned}
+& \text{maximize}
+& & \mathrm{Tr}\left(\bvec{V}^{\mathrm{T}} \bvec{K} \bvec{V}\right) \\
+& \text{subject to}
+& & \bvec{v}_i^{\mathrm{T}}\bvec{v}_j = \delta_{ij},
+% \;(i, j \in \left\{1, \cdots,  K\right\})
+% & & \|\bvec{V}_k\|_{2}^{2} = 1 \; (k = 1, \cdots, K)
+\end{aligned}
+\end{split} \label{eq:PSA}
+\end{align}
+%
+where $\bvec{V}$ is a $d \times d$ matrix. As is well known, such $\bvec{V}$ is given by
+the invertible matrix with each column corresponding to $\bvec{K}$'s
+eigenvector.
+%
+We may define $k$-th dominant eigenvector $\bvec{v}_{k}$ as
+the \textbf{$k$-th principal sensitivity map.} These sub-principal sensitivity maps grant us
+access to even richer information that underlies the dataset.
+%
+We will show the benefits of these additional maps in Fig.\,3.
+From now on, we will refer to the first PSM by just ``PSM'', unless noted otherwise.
+% END OF PARAGRAPH
+
+% RELATION with PCA
+Recall that, in the ordinary PCA,  $\bvec{K}$ in the definition \eqref{eq:PSA} is given by the covariance
+$E\left[ \bvec{x} \bvec{x}^{\mathrm{T}} \right]$, where $\bvec{x}$ is the
+centered random variable.
+%
+Thus, our algorithm can be seen as the PCA
+applied to the covariance of $\nabla f(\bvec{x})$ without centering.
+% END OF SUBSUBSECTIOn
+
+\subsubsection{Sparse PSA}
+%
+One may use the new definition \eqref{eq:PSA} as a starting
+point to develop sparse, visually intuitive sensitivity maps.
+%
+For example, we may introduce the existing techniques in sparse PCA and
+sparse coding into our framework.
+%
+We may do so \cite{Jenatton2009} by replacing the covariance matrix in
+its derivation with our $\bvec{K}$.
+In particular, we can define an alternative optimization problem:
+%
+\begin{align}
+\begin{split}
+ \begin{aligned}
+& \argmin_{\bvec{V}, \bvec{\alpha}} \left(\frac{1}{2} \sum_{i}^{N} \| \nabla f(\bvec{x}_i)
+  - \bvec{V} \bvec{\alpha}_i \|_2^2 + \lambda \sum_{k}^{r} \|\bvec{v}_k\|_1 \right) \\
+& \text{subject to}\,\,\,\,\|\bvec{\alpha}_i\|_2 = 1,
+ \end{aligned}
+\end{split}
+\label{eq:sparsePSA}
+\end{align}
+%
+where $r$ is the number of sensitivity maps and $N$ is the number of samples.
+For the implementation, we used scikit-learn \cite{Pedregosa2012}.
+% END OF SUBSUBSECTIOn
+
+\clearpage
+\section{Neural networks for classification}
+\label{sec:NN}
+%
+The classifiers to which we applied PSA in this study were feed-forward
+neural networks \cite{bishop2006pattern}.
+Thus, in this section, we will explain the architecture of feed-forward neural
+networks and training of them.
+
+\subsection{Architecture of feed-forward neural networks}
+%%% ARCHITECTURE %%%
+We trained feed-forward neural networks with $L$ hidden layers.
+% definition of L and a
+The internal potential of the $i$-th unit in the $l$-th hidden layer $a^{(l)}_i$ $(l = 1, \cdots, L)$ is given as a weighted summation of its inputs:
+% definition of a
+\begin{equation}
+ a^{(l)}_i = \sum_{j=1}^{n_{l-1}} w^{(l)}_{ij} z^{(l-1)}_j + b^{(l)}_i,
+\end{equation}
+% w_i,j , b, n_l
+where $w^{(l)}_{ij}$ and $b^{(l)}_i$ are a weight and a bias, respectively.
+%
+Here, $n_l$ is the number of units in the $l$-th hidden layer.
+%
+We define $\bvec{z}^{(0)}$ as the input vector $\bvec{x}$ to the network.
+%
+This forces $n_0$ to be equal to the input's dimensionality $d$.
+% activation function
+We denote $\bvec{z}^{(l)} = \left(z^{(l)}_1, \cdots, z^{(l)}_{n_l}\right)$ as the outputs of the $l$-th hidden layer.
+%
+These outputs are given by applying a nonlinear activation function $h$ to the internal potential as
+% definition of output of each hidden layer
+\begin{equation}
+ z^{(l)}_i = h(a^{(l)}_i)_{.}
+\end{equation}
+% ReLU
+As the activation function $h$, we used a sigmoid function $1 /
+\left(1 +  \exp(-x) \right)$ or ReLU \cite{jarrett2009best}, a piecewise
+linear function $max(0, x)$.
+% advantages of ReLU
+ReLU as a choice of the activation function has a couple of advantages; its piecewise linearity can save the computational cost to calculate its derivative, and its non-saturating character in the positive domain prevents the learning algorithm from halting due to gradient vanishing of nonlinear activation functions.
+% softmax
+The last hidden layer was connected to the softmax (output) layer, so that the output from the $k$-th unit of the output layer can be interpreted as the posterior probability of class $k$, given by
+% definition of softmax outputs
+\begin{equation}
+ P(Y = k \,|\, \bvec{x}, \bvec{W})
+=
+\frac{\exp\left(\sum_{j=1}^{n_L}w_{kj} z^{(L)}_j + b_k\right)}
+{\sum_{k^{'}=1}^{K}\exp\left(\sum_{j=1}^{n_L}w_{k^{'}j} z^{(L)}_j + b_{k^{'}}\right)},
+\end{equation}
+%
+where $K$ is the number of classes, and $\bvec{W}$ denotes all the parameters (weights and biases) of the whole network.
+%
+Here, $Y$ is a random variable signifying the class to which $\bvec{x}$ belongs.
+% END OF PARAGRAPH
+
+\subsection{Training via MSGD}
+%%% LEARNING %%%
+We trained the neural network of the architecture above with stochastic gradient descent (SGD).
+We used a negative log-likelihood as the cost function of the learning
+% definition of NLL
+\begin{equation}
+  L(\bvec{W}) = - \sum_{n=1}^{N} \log P(Y_n = t_n \,|\, \bvec{x}_n, \bvec{W}),
+\end{equation}
+%
+where $\left\{(\bvec{x}_1, t_1), \cdots, (\bvec{x}_N, t_N)\right\}$ constituted the given dataset.
+%
+Here $t \in \left\{1, \cdots, K\right\}$ denotes a class label.
+%
+In particular, to minimize the above cost function, minibatch stochastic
+gradient descent (MSGD) was introduced so that SGD was performed every
+100 samples:
+% definition of SGD
+\begin{align} % equation environment cause error on Authorea.
+\bvec{W}_{t} &= \bvec{W}_{t-1} - \eta_{t} \left. \frac{\partial
+L'(\bvec{W})}{\partial \bvec{W}} \right|_{\bvec{W}_{t-1}},
+\end{align}
+%
+where $L'$ is the cost function for the cached subset of $100$ samples in
+the minibatch, and $\eta_{t}$ is the learning rate.
+% initialization
+Each weight of hidden layers was initialized at a small value randomly
+sampled from a zero-mean normal distribution with the standard deviation
+of $0.01$, and weights of softmax layer and biases were initialized to
+zero.
+% early stopping
+Early stopping was also adopted; if the classification performance for the
+validation dataset did not increase for $100$ learning epochs, then
+learning was terminated.
+% END OF PARAGRAPH
+
+%%% DROPOUT %%%
+To further avoid over-fitting, we used the dropout technique \cite{Hinton2012} in some cases.
+During the training, the activity $z^{(l)}_i$ was randomly replaced by $0$ with probability $p$.
+We set $p = 0.5$ for hidden units and $0.2$ for inputs.
+This drop-out procedure plays a role of regularization.
+When testing the trained neural network,
+all the nodes were activated, and their weights were multiplied by $1-p$.
+This is to make the mean activity level of each network element consistent
+between the training phase and the test phase.
+% END OF SECTION

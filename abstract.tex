@@ -1,0 +1,37 @@
+\begin{abstract}
+ In this thesis, we studied methods to visualize the knowledge captured by
+ supervised classifiers.
+ %
+ In particular, we developed a new method, ``Principal Sensitivity
+ Analysis (PSA),'' to analyze the sensitivity of the trained classifier.
+ %
+ In PSA, principal sensitivity map (PSM) is defined as the
+ direction in the input space to which the classifier is most sensitive,
+ and $k$-th PSM is also analogously defined for each $k$.
+ %
+ Using these maps, PSA decomposes the input space based on the sensitivity of
+ the classifier.
+ %
+ As a primitive case study, we first applied the PSA to the classifier trained
+ for digit classification.
+ %
+ We were able to find a direct association between the PSMs and the
+ discriminative features of the digits that we humans intuitively use
+ for classification.
+ %
+ Next, in order to assess the performance of
+ our algorithm on nonlinear and hierarchical classifiers in a
+ practical setting, we applied the PSA to the deep neural network (DNN) trained with
+ large-scale neuroimaging database.
+ %
+ We confirmed that, in comparison to other baseline methods,
+ the DNN can capture richer discriminative features of brain activities
+ that are common to many human subjects.
+ %
+ Interestingly, we were able to find nontrivial connections between
+ the PSMs of the trained DNN and the functional connectivity among brain areas,
+ a phenomenon studied in neuroscience.
+ %
+ This suggests a relation between the discriminative features of
+ brain activities and the functional connectivity.
+\end{abstract}
