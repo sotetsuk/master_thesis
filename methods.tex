@@ -163,7 +163,7 @@ From now on, we will refer to the first PSM by just ``PSM'', unless noted otherw
 
 % RELATION with PCA
 Recall that, in the ordinary PCA,  $\bvec{K}$ in the definition \eqref{eq:PSA} is given by the covariance
-$E\left[ \bvec{x} \bvec{x}^{\mathrm{T}} \right]$, where $\bvec{x}$ is the
+$E_q\left[ \bvec{x} \bvec{x}^{\mathrm{T}} \right]$, where $\bvec{x}$ is the
 centered random variable.
 %
 Thus, our algorithm can be seen as the PCA
@@ -180,14 +180,18 @@ sparse coding into our framework.
 %
 We may do so \cite{Jenatton2009} by replacing the covariance matrix in
 its derivation with our $\bvec{K}$.
-In particular, we can define an alternative optimization problem:
+In particular, we can define an alternative optimization problem
+about $\bvec{V}$ and $\bvec{\alpha}$:
 %
 \begin{align}
 \begin{split}
  \begin{aligned}
-& \argmin_{\bvec{V}, \bvec{\alpha}} \left(\frac{1}{2} \sum_{i}^{N} \| \nabla f(\bvec{x}_i)
-  - \bvec{V} \bvec{\alpha}_i \|_2^2 + \lambda \sum_{k}^{r} \|\bvec{v}_k\|_1 \right) \\
-& \text{subject to}\,\,\,\,\|\bvec{\alpha}_i\|_2 = 1,
+& \text{minimize}
+& & \frac{1}{2} \sum_{i}^{N} \| \nabla f(\bvec{x}_i)
+  - \bvec{V} \bvec{\alpha}_i \|_2^2 + \lambda \sum_{k}^{r}
+  \|\bvec{v}_k\|_1\\
+& \text{subject to}
+& & \|\bvec{\alpha}_i\|_2 = 1,
  \end{aligned}
 \end{split}
 \label{eq:sparsePSA}
