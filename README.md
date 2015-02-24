@@ -1,1 +1,1 @@
-# Master thesis
+The master thesis of @sotetsuk
