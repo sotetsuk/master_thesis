@@ -27,7 +27,7 @@ This can be written as
 %
 where $q$ is the distribution over the input space.
 %
-In actual implementation, the integral \eqref{eq:original_sensitivity} is
+In actual implementation, the integral~\eqref{eq:original_sensitivity} is
 computed with the empirical distribution $q$ of the test dataset.
 %
 Now, the vector
@@ -44,7 +44,7 @@ of input features.
 
 \subsection{Sensitivity in arbitrary direction}
 %
-Here, we generalize the definition \eqref{eq:original_sensitivity}.
+Here, we generalize the definition~\eqref{eq:original_sensitivity}.
 We define $s(\bvec{v})$ as the sensitivity of $f$ in arbitrary direction $\bvec{v} := \sum_{i}^{d} v_i
 \bvec{e}_i$, where $\bvec{e}_i$ denotes the $i$-th standard basis in $\RR^d$:
 %
@@ -82,7 +82,7 @@ we can rewrite $s(\bvec{v})$ by
 
 \subsection{Formulation of PSA}
 %
-The classical setting \eqref{eq:original_sensitivity} was developed
+The classical setting~\eqref{eq:original_sensitivity} was developed
 in order to quantify the sensitivity of $f$ with respect
 to each individual input feature independently.
 %
@@ -112,8 +112,7 @@ combination, and this gives rise to the map over the set of all input features.
 As such, we can say that $\bvec{v}$ is the \textbf{principal sensitivity map
 (PSM)} over the set of input features.
 %
-From now on, we call $\bvec{s}$ in the classical definition
-\eqref{eq:classical_def} as the \textbf{standard sensitivity map} and
+From now on, we call $\bvec{s}$ in the classical definition~\eqref{eq:classical_def} as the \textbf{standard sensitivity map} and
 make the distinction.
 %
 The magnitude of $v_i$ represents the extent
@@ -162,7 +161,7 @@ From now on, we will refer to the first PSM by just ``PSM'', unless noted otherw
 % END OF PARAGRAPH
 
 % RELATION with PCA
-Recall that, in the ordinary PCA,  $\bvec{K}$ in the definition \eqref{eq:PSA} is given by the covariance
+Recall that, in the ordinary PCA,  $\bvec{K}$ in the definition~\eqref{eq:PSA} is given by the covariance
 $E_q\left[ \bvec{x} \bvec{x}^{\mathrm{T}} \right]$, where $\bvec{x}$ is the
 centered random variable.
 %
@@ -172,7 +171,7 @@ applied to the covariance of $\nabla f(\bvec{x})$ without centering.
 
 \subsubsection{Sparse PSA}
 %
-One may use the new definition \eqref{eq:PSA} as a starting
+One may use the new definition~\eqref{eq:PSA} as a starting
 point to develop sparse, visually intuitive sensitivity maps.
 %
 For example, we may introduce the existing techniques in sparse PCA and
