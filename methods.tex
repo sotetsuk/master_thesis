@@ -4,7 +4,7 @@
 \subsection{Conventional sensitivity analysis}
 %
 Before introducing the PSA, we describe the original sensitivity map
-introduced in \cite{Kjems2002}.
+introduced in~\cite{Kjems2002}.
 %
 Let $d$ be the dimension of the input space, and let
 $f: \RR^d \to \RR$ be the classifier function obtained from supervised training.
@@ -38,7 +38,7 @@ Now, the vector
 \end{align}
 of these values will give us an intuitive measure for the degree
 of importance that the classifier attaches to each input feature.
-Kjems et al.\ \cite{Kjems2002} defined $\bvec{s}$ as \textbf{sensitivity map} over the set
+Kjems et al.\~\cite{Kjems2002} defined $\bvec{s}$ as \textbf{sensitivity map} over the set
 of input features.
 % END OF SUBSECTION
 
@@ -124,7 +124,7 @@ to which the input feature influences $f$.
 The new map is thus richer in information than the standard
 sensitivity map.
 %
-In Section 3.1 we will demonstrate the benefit of this extra
+In Section~\ref{sec:psa_art} we will demonstrate the benefit of this extra
 information.
 % END OF SUBSECTION
 
@@ -178,7 +178,7 @@ point to develop sparse, visually intuitive sensitivity maps.
 For example, we may introduce the existing techniques in sparse PCA and
 sparse coding into our framework.
 %
-We may do so \cite{Jenatton2009} by replacing the covariance matrix in
+We may do so~\cite{Jenatton2009} by replacing the covariance matrix in
 its derivation with our $\bvec{K}$.
 In particular, we can define an alternative optimization problem
 about $\bvec{V}$ and $\bvec{\alpha}$:
@@ -198,7 +198,7 @@ about $\bvec{V}$ and $\bvec{\alpha}$:
 \end{align}
 %
 where $r$ is the number of sensitivity maps and $N$ is the number of samples.
-For the implementation, we used scikit-learn \cite{Pedregosa2012}.
+For the implementation, we used scikit-learn~\cite{Pedregosa2012}.
 % END OF SUBSUBSECTIOn
 
 \clearpage
@@ -206,7 +206,7 @@ For the implementation, we used scikit-learn \cite{Pedregosa2012}.
 \label{sec:NN}
 %
 The classifiers to which we applied PSA in this study were feed-forward
-neural networks \cite{bishop2006pattern}.
+neural networks~\cite{bishop2006pattern}.
 Thus, in this section, we will explain the architecture of feed-forward neural
 networks and training of them.
 
@@ -237,7 +237,7 @@ These outputs are given by applying a nonlinear activation function $h$ to the i
 \end{equation}
 % ReLU
 As the activation function $h$, we used a sigmoid function $1 /
-\left(1 +  \exp(-x) \right)$ or ReLU \cite{jarrett2009best}, a piecewise
+\left(1 +  \exp(-x) \right)$ or ReLU~\cite{jarrett2009best}, a piecewise
 linear function $max(0, x)$.
 % advantages of ReLU
 ReLU as a choice of the activation function has a couple of advantages; its piecewise linearity can save the computational cost to calculate its derivative, and its non-saturating character in the positive domain prevents the learning algorithm from halting due to gradient vanishing of nonlinear activation functions.
@@ -292,7 +292,7 @@ learning was terminated.
 % END OF PARAGRAPH
 
 %%% DROPOUT %%%
-To further avoid over-fitting, we used the dropout technique \cite{Hinton2012} in some cases.
+To further avoid over-fitting, we used the dropout technique~\cite{Hinton2012} in some cases.
 During the training, the activity $z^{(l)}_i$ was randomly replaced by $0$ with probability $p$.
 We set $p = 0.5$ for hidden units and $0.2$ for inputs.
 This drop-out procedure plays a role of regularization.

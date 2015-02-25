@@ -7,12 +7,12 @@ predictors and classifiers.
 In particular, deep learning, a technology to train complicated neural
 networks with multiple hidden layers, i.e., deep neural networks (DNNs),
 has been attracted much attention because of its outstanding performance in
-several artificial intelligence tasks \cite{krizhevsky2012imagenet,seide2011conversational,DeepFace}.
+several artificial intelligence tasks~\cite{krizhevsky2012imagenet,seide2011conversational,DeepFace}.
 %
 Now, literature suggests the ability of supervised learning not only to reproduce
-``intuition and experience'' based on human supervision \cite{DeepFace},
+``intuition and experience'' based on human supervision~\cite{DeepFace},
 but also to successfully classify the objects that humans cannot
-sufficiently classify with inspection alone \cite{Horikawa2013,Mural1991}.
+sufficiently classify with inspection alone~\cite{Horikawa2013,Mural1991}.
 %
 This work is motivated by the cases in which the supervised
 classifier eclipses the human decisions.
@@ -29,7 +29,7 @@ data and the subject classes than us, because our incompetence in the classifica
 can be attributed solely to our lack of understanding about the class
 properties and/or the similarity metrics.
 %
-For example, Miyawaki et al.\ \cite{miyawaki2008visual} used
+For example, Miyawaki et al.\~\cite{miyawaki2008visual} used
 logistic regression for this purpose in neuroimaging.
 %
 Let us consider the classifier $f:\RR^{d} \rightarrow [0, 1]$ with the
@@ -50,7 +50,7 @@ One can understand that if the absolute value of weight $|w_i|$ is large enough,
 corresponding $i$-th input dimension (voxel) is important for characterizing the
 subject class.
 %
-Other neuroimaging studies \cite{LaConte2005,yamashita2008sparse,abraham2014machine} also
+Other neuroimaging studies~\cite{LaConte2005,yamashita2008sparse,abraham2014machine} also
 provided such visualization of linear models.
 % END OF PARAGRAPH
 
@@ -77,11 +77,11 @@ feed-forward neural networks, and thus DNNs with more hidden layers are
 too complicated for the human to interpret their decision.
 %
 However, the superiority of nonlinear machine learning techniques like deep
-learning \cite{krizhevsky2012imagenet,seide2011conversational,DeepFace} strongly suggests that the trained classifiers
+learning~\cite{krizhevsky2012imagenet,seide2011conversational,DeepFace} strongly suggests that the trained classifiers
 capture the ``invisible'' properties of the subject classes.
 %
 Geoff Hinton solidified this into the philosophy of
-``dark knowledge'' captured within the trained neural networks \cite{DarkKnowledge}.
+``dark knowledge'' captured within the trained neural networks~\cite{DarkKnowledge}.
 %
 Thus, our objective is to visualize the decision of such nonlinear and hierarchical machines like DNN
 in the interpretable form.
@@ -89,7 +89,7 @@ in the interpretable form.
 
 %%% Previous work %%%
 For the visualization of high-dimensional feature space of nonlinear machines,
-Zurada et al.\ \cite{Zurada1994,Zurada1997},  and Kjems et al.\ \cite{Kjems2002}
+Zurada et al.\~\cite{Zurada1994,Zurada1997},  and Kjems et al.\~\cite{Kjems2002}
 presented seminal works.
 %
 Zurada et al.\ defined \textit{sensitivity} by
@@ -105,7 +105,7 @@ in the context of neuroimaging.
 Note that when the classifier $f$ is a linear model like logistic
 regression, the sensitivity satisfies $s_i \propto w_i^2$.
 %
-Rasmussen et al.\ \cite{Rasmussen2011} applied this \textit{sensitivity analysis}
+Rasmussen et al.\~\cite{Rasmussen2011} applied this \textit{sensitivity analysis}
 to a nonlinear kernel method in functional neuroimaging.
 %
 Because the sensitivity analysis provides a single map by the
@@ -113,7 +113,7 @@ integration \eqref{eq:sensitivity_intro} over the
 whole input space $\RR^{d}$, we can regard the sensitivity map as a
 ``global'' visualization of the classifier $f$.
 %
-Baehrens et al.\ \cite{Baehrens2010} took another approach.
+Baehrens et al.\~\cite{Baehrens2010} took another approach.
 %
 Baehrens et al.\ defined \textit{local explanation vector} by the
 gradient $\nabla f (\bvec{x})$ and used it for
@@ -126,7 +126,7 @@ there is still much room left for improvement.
 %
 Machine learning techniques in neuroimaging, for example,
 prefer linear kernels to nonlinear kernels because of the lack of
-visualization techniques \cite{LaConte2005}.
+visualization techniques~\cite{LaConte2005}.
 % END OF PARAGRAPH
 
 %%% Methods %%%
@@ -165,26 +165,26 @@ We then applied the PSA to the DNN-based decoder to highlight the subject-indepe
 features used by the decoders for classifying brain activities.
 %
 By illustrating these features as brain maps, we found the association between
-the features and functional connectivity established in human fMRI studies \cite{raichle2001default,raichle2007default,taylor2009two,cole2013multi}.
+the features and functional connectivity established in human fMRI studies~\cite{raichle2001default,raichle2007default,taylor2009two,cole2013multi}.
 % END OF PARAGRAPH
 
 %%% OUTLINE %%%
 This thesis is structured as follows.
 %
-In Section\,\ref{sec:methods}, we will provide the PSA's algorithm along with
+In Section~\ref{sec:methods}, we will provide the PSA's algorithm along with
 the explanation of the conventional sensitivity analysis.
 %
-In Section\,\ref{sec:NN}, we will explain the architecture of
+In Section~\ref{sec:NN}, we will explain the architecture of
  feed-forward neural networks, to which we apply the PSA, and
  also explain its training.
 %
-In Section\,\ref{sec:results}, we will show a primitive application of
+In Section~\ref{sec:results}, we will show a primitive application of
 the PSA to the classifier trained for digit classification,
 and demonstrate its advantages in comparison to the conventional sensitivity analysis.
 %
-In Section\,\ref{sec:application}, we will also provide an practical
+In Section~\ref{sec:application}, we will also provide an practical
 application of the PSA to functional neuroimaging.
 %
-Finally, in Section\,\ref{sec:discussion}, we will summarize the results
+Finally, in Section~\ref{sec:discussion}, we will summarize the results
 and make conclusive remarks.
 % END OF PARAGRAPH

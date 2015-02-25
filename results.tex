@@ -40,14 +40,14 @@ and 10,000 sample patterns.
 Using the artificial dataset above and the standard MNIST, we trained a feed-forward neural
 network for the classification of ten numerics.
 %
-In Table\,\ref{tab:NN_specification}, we provide the structure of the neural network and its performance over
+In Table~\ref{tab:NN_specification}, we provide the structure of the neural network and its performance over
 each dataset.
 %
 For either dataset, the training was conducted via MSGD with constant
 learning rate $\eta$.
 %
 %
-We also adopted a dropout method \cite{Hinton2012} only for the training
+We also adopted a dropout method~\cite{Hinton2012} only for the training
 on the MNIST dataset.
 %
 The output from each unit in the final layer is given by the posterior
@@ -79,6 +79,7 @@ given above.
 % END OF SUBSECTION
 
 \subsection{PSA of the classifier trained on artificial dataset}
+\label{sec:psa_art}
 %
 We will describe three ways in which the PSA can be superior to the
 analysis based on standard sensitivity map.
@@ -130,7 +131,7 @@ computed from PSA.
 %
 Fig.\,3(a) shows the first PSM through the third PSM for the numerals $0$ and
 $9$.\footnote{We list the PSMs for all the numerals ($0, \dots, 9$) in
-the Appendix\,\ref{sec:appendix_digit}.}
+the Appendix~\ref{sec:appendix_digit}.}
 %
 In order to show how this extra information benefits us in visualization
 of the classification problem, we consider the following
@@ -270,11 +271,11 @@ and represents each one of them by a group of voxels.
 %
 In other areas of science, one does not necessarily have to face such problems.
 %
-In genetics, data can be naturally partitioned into genes \cite{Yukinawa2009}.
+In genetics, data can be naturally partitioned into genes~\cite{Yukinawa2009}.
 %
 Likewise, in meteorology, 3D dataset is often translated into voxel
 structures, and a group of voxels may represent geographical region of
-specific terrain \cite{Kontos2005}.
+specific terrain~\cite{Kontos2005}.
 %
 In this light, the digit recognition in unregistered MNIST data may not
 be an appropriate example for showing the effectiveness of our visualization method.
